@@ -90,6 +90,9 @@ function startConnection() {
                 $("#" + data.cnt).addClass(data.team == 1 ? 'white' : 'black')
             }
             break;
+        case "win":
+            showMsg("Team " + (data.team == 1 ? 'white' : 'black') + " wins")
+            break;
         case "endGame":
             break;
         case "newGame":

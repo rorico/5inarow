@@ -54,6 +54,35 @@ for (var i = 0 ; i < length ; i++) {
 listeners = [];
 var currentPlayer = 0;
 
+function check(cnt) {
+    var x = cnt % length
+    var y = (cnt - x) / length
+    var team = board[cnt]
+    var dirs = [
+        [1,1],
+        [0,1],
+        [1,0],
+        [1,-1]
+    ]
+    return !!dirs.find(d => {
+        var cnt = 0
+        for (var i = -4 ; i <= 4 ; i++) {
+            var x1 = x + i*d[0], y1 = y + i*d[1]
+            if (x1 >= 0 && x1 < length && y1 >= 0 && y1 < length) {
+                if (board[x1 + length*y1] === team) {
+                    cnt++
+                    if (cnt === 5) {
+                        return true
+                    }
+                } else {
+                    cnt = 0
+                }
+            }
+        }
+    })
+}
+
+
 wsServer.on("request", function(request) {
     var connection = request.accept(null, request.origin);
     var query = request && request.resourceURL && request.resourceURL.query;
@@ -81,8 +110,15 @@ wsServer.on("request", function(request) {
             case "play":
                 if (query.team == currentPlayer) {
                     board[query.cnt] = query.team
+                    var win = check(query.cnt)
                     listeners.forEach((l) => {
                         l && l(query);
+                        if (win) {
+                            l && l({
+                                type: "win",
+                                team: query.team
+                            })
+                        }
                     })
                     currentPlayer = 1 - currentPlayer
                 }
