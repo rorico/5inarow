@@ -52,7 +52,18 @@ for (var i = 0 ; i < length ; i++) {
     }
 }
 listeners = [];
+var startPlayer = 0
 var currentPlayer = 0;
+var replay = [false, false]
+var winner = null
+function restartGame() {
+    currentPlayer = 1 - currentPlayer
+    currentPlayer = startPlayer
+    winner = null
+    for (var i = 0 ; i < board.length ; i++) {
+        board[i] = null
+    }
+}
 
 function check(cnt) {
     var x = cnt % length
@@ -101,26 +112,44 @@ wsServer.on("request", function(request) {
             id = 2;
         }
     }
-    sendData({type: 'start', team: id, board: board})
+    sendData({type: 'start', team: id, board: board, turn: currentPlayer})
+    if (winner !== null) {
+        sendData({
+            type: "win",
+            team: winner
+        })
+    }
     listeners[id] = sendData
     messageHandler = function(message) {
         var query = JSON.parse(message);
         var type = query ? query.type : "";
         switch(type) {
             case "play":
-                if (query.team == currentPlayer) {
+                if (query.team == currentPlayer && board[query.cnt] === null) {
                     board[query.cnt] = query.team
                     var win = check(query.cnt)
                     listeners.forEach((l) => {
                         l && l(query);
                         if (win) {
+                            winner = query.team
                             l && l({
                                 type: "win",
-                                team: query.team
+                                team: winner
                             })
                         }
                     })
                     currentPlayer = 1 - currentPlayer
+                }
+                break;
+                
+            case "replay":
+                replay[id] = true
+                if (replay[0] && replay[1]) {
+                    restartGame()
+                    listeners.forEach((l, i) => {
+                        l && l({type: 'start', team: i, board: board, turn: currentPlayer})
+                    })
+                    replay[0] = replay[1] = false
                 }
                 break;
             case "getGames":

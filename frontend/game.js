@@ -39,6 +39,7 @@ $('.clickable').click(function() {
 
 var team;
 var connection;
+var myTurn;
 
 $(document).ready(function() {
     startConnection();
@@ -79,7 +80,18 @@ function startConnection() {
             for (var i = 0 ; i < length ; i++) {
                 if (board[i] !== null) {
                     $("#" + i).addClass(board[i] ? 'white' : 'black')
+                } else {
+                    $("#" + i).removeClass('white black')
                 }
+            }
+            myTurn = data.turn === team
+            if (myTurn) {
+                $("table").addClass("myTurn")
+            } else {
+                $("table").removeClass("myTurn")
+            }
+            if (team === 2) {
+                showMsg("Two players already playing")
             }
             break;
         case "play":
@@ -88,10 +100,21 @@ function startConnection() {
             } else {
                 var pos = data.pos;
                 $("#" + data.cnt).addClass(data.team == 1 ? 'white' : 'black')
+                if (data.team === team) {
+                    $("table").removeClass("myTurn")
+                } else {
+                    $("table").addClass("myTurn")
+                }
             }
             break;
         case "win":
-            showMsg("Team " + (data.team == 1 ? 'white' : 'black') + " wins")
+            showMsg("Team " + (data.team == 1 ? 'white' : 'black') + " wins!" + 
+                    "<div id='yes'>REPLAY</div>")
+            $("#yes").click(function() {
+                $(this).addClass("clicked")
+                $("#msg").remove()
+                sendData({type: "replay"})
+            })
             break;
         case "endGame":
             break;

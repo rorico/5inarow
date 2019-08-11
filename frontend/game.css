@@ -3,11 +3,41 @@ table {
     margin-right: auto;
     border-collapse: collapse;
     border-spacing: 0;
+    overflow-x: scroll;
+    border: 1px solid white;
+}
+table.myTurn {
+    /* animation: glow 1.5s infinite; */
+}
+@keyframes glow {
+    0% {
+        border: 1px solid white;
+    }
+    50% {
+        border: 1px solid black;
+    }
+    100% {
+        border: 1px solid white;
+    }
+}
+#yes {
+    border: 1px solid black;
+    border-radius: 5px;
+    background-color: black;
+    color: white;
+    font-size:60px;
+    cursor: pointer;
+}
+#yes.clicked {
+    color: black;
+    background-color: white;
+    cursor: initial;
 }
 .button {
     /* border: 1px solid black; */
     height: 40px;
     width: 40px;
+    min-width: 40px;
     padding: 0; margin: 0;
     margin: 0;
 }
@@ -43,7 +73,7 @@ table {
     top: 4px;
     border-radius: 100%;
 }
-.clickable:hover {
+.myTurn .clickable:hover {
     cursor: pointer;
     border: 1px solid black;
 }
@@ -67,4 +97,5 @@ table {
     transform: translate(-50%, -50%);
     font-size: 80px;
     text-align: center;
+    opacity: 0.8;
 }
