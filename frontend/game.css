@@ -1,0 +1,70 @@
+table {
+    margin-left: auto; 
+    margin-right: auto;
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+.button {
+    /* border: 1px solid black; */
+    height: 40px;
+    width: 40px;
+    padding: 0; margin: 0;
+    margin: 0;
+}
+.button>div {
+    height: 50%;
+    width: 50%;
+    display: inline-block;
+    vertical-align: top;
+    box-sizing: border-box;
+}
+.button>div:nth-child(2) {
+    border-bottom: 1px solid black;
+    border-right: 1px solid black;
+}
+.button>div:nth-child(3) {
+    border-bottom: 1px solid black;
+}
+.button>div:nth-child(4) {
+    border-right: 1px solid black;
+}
+/* 5th child has no borders */
+.button>div:nth-child(1) {
+    position: absolute;
+    height: 0;
+    width: 0;
+}
+
+.clickable {
+    position: relative;
+    height: 30px;
+    width: 30px;
+    left: 4px;
+    top: 4px;
+    border-radius: 100%;
+}
+.clickable:hover {
+    cursor: pointer;
+    border: 1px solid black;
+}
+.clickable.white {
+    background-color: white;
+    border: 1px solid black;
+}
+.clickable.black {
+    background-color: black;
+    border: 1px solid black;
+}
+
+#msg {
+    border: 1px solid black;
+    background-color: white;
+    position: fixed;
+    border-radius: 10px;
+    padding: 20px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 80px;
+    text-align: center;
+}

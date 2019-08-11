@@ -1,0 +1,23 @@
+{
+  "name": "5inarow",
+  "version": "1.0.0",
+  "description": "Board Game Simulation",
+  "main": "server.js",
+  "dependencies": {
+    "express": "^4.16.2",
+    "websocket": "1.0.23"
+  },
+  "engine": {
+    "node": "*",
+    "npm": "*"
+  },
+  "scripts": {
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/rorico/Side-Projects.git"
+  },
+  "private": true,
+  "author": "rorico"
+}
