@@ -67,11 +67,12 @@ table.myTurn {
 
 .clickable {
     position: relative;
-    height: 30px;
-    width: 30px;
+    height: 32px;
+    width: 32px;
     left: 4px;
     top: 4px;
     border-radius: 100%;
+    box-sizing: border-box;
 }
 .myTurn .clickable:hover {
     cursor: pointer;
@@ -96,17 +97,20 @@ table.myTurn {
     border: 1px solid black;
 }
 .clickable.last {
-    animation: 1.5s glow infinite;
+    border-width: 3px;
+}
+.clickable.last.black {
+    background-color: #363636;
 }
 
-@keyframes glow {
-    0% {
+@keyframes flash {
+    15% {
         opacity: 1;
     }
     50% {
         opacity: 0.5;
     }
-    100% {
+    85% {
         opacity: 1;
     }
 }
