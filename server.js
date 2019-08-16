@@ -57,7 +57,7 @@ var currentPlayer = 0;
 var replay = [false, false]
 var winner = null
 function restartGame() {
-    currentPlayer = 1 - currentPlayer
+    startPlayer = 1 - startPlayer
     currentPlayer = startPlayer
     winner = null
     for (var i = 0 ; i < board.length ; i++) {

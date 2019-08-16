@@ -77,6 +77,16 @@ table.myTurn {
     cursor: pointer;
     border: 1px solid black;
 }
+.myTurn.black .clickable:hover {
+    cursor: pointer;
+    border: 1px solid black;
+    background-color: black;
+    opacity: 0.7;
+}
+.myTurn.white .clickable:hover {
+    cursor: pointer;
+    border: 1px solid black;
+}
 .clickable.white {
     background-color: white;
     border: 1px solid black;
@@ -84,6 +94,21 @@ table.myTurn {
 .clickable.black {
     background-color: black;
     border: 1px solid black;
+}
+.clickable.last {
+    animation: 1.5s glow infinite;
+}
+
+@keyframes glow {
+    0% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0.5;
+    }
+    100% {
+        opacity: 1;
+    }
 }
 
 #msg {

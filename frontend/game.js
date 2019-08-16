@@ -84,6 +84,7 @@ function startConnection() {
                     $("#" + i).removeClass('white black')
                 }
             }
+            $("table").addClass(team ? 'white' : 'black')
             myTurn = data.turn === team
             if (myTurn) {
                 $("table").addClass("myTurn")
@@ -99,7 +100,8 @@ function startConnection() {
                 alert("something went very wrong");
             } else {
                 var pos = data.pos;
-                $("#" + data.cnt).addClass(data.team == 1 ? 'white' : 'black')
+                $(".last").removeClass('last')
+                $("#" + data.cnt).addClass(data.team == 1 ? 'white' : 'black').addClass('last')
                 if (data.team === team) {
                     $("table").removeClass("myTurn")
                 } else {
