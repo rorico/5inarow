@@ -110,7 +110,7 @@ function startConnection() {
             }
             break;
         case "win":
-            showMsg("Team " + (data.team == 1 ? 'white' : 'black') + " wins!" + 
+            showMsg((data.team == 1 ? 'White' : 'Black') + " wins!" + 
                     "<div id='yes'>REPLAY</div>")
             $("#yes").click(function() {
                 $(this).addClass("clicked")
