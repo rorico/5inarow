@@ -45,7 +45,7 @@ var wsServer = new WebSocketServer({
 });
 
 var board = [];
-var length = 17
+var length = 15
 for (var i = 0 ; i < length ; i++) {
     for (var j = 0 ; j < length ; j++) {
         board.push(null);

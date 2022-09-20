@@ -3,7 +3,7 @@ var games = 0;
 
 //game parts
 var board = [];
-var length = 17
+var length = 15
 for (var i = 0 ; i < length ; i++) {
     var x = [];
     for (var j = 0 ; j < length ; j++) {

@@ -5,6 +5,10 @@ table {
     border-spacing: 0;
     overflow-x: scroll;
     border: 1px solid white;
+    top: 50%;
+    left: 50%;
+    position: fixed;
+    transform: translate(-50%, -50%);
 }
 table.myTurn {
     /* animation: glow 1.5s infinite; */
@@ -100,7 +104,8 @@ table.myTurn {
     border-width: 3px;
 }
 .clickable.last.black {
-    background-color: #363636;
+    background-color: white;
+    border-width: 13px;
 }
 
 @keyframes flash {
