@@ -30,11 +30,19 @@ $("body").html(html)
 
 
 $('.clickable').click(function() {
-    sendData({
-        type: "play",
-        cnt: this.id,
-        team: team
-    })
+    if ($(this).hasClass("last")) {
+        sendData({
+            type: "undoRequest",
+            team: team
+        })
+        showMsg("Asking other player to undo")
+    } else {
+        sendData({
+            type: "play",
+            cnt: this.id,
+            team: team
+        })
+    }
 });
 
 var team;
@@ -91,6 +99,7 @@ function startConnection() {
             } else {
                 $("table").removeClass("myTurn")
             }
+            $("#" + data.last).addClass('last')
             if (team === 2) {
                 showMsg("Two players already playing")
             }
@@ -117,6 +126,35 @@ function startConnection() {
                 $("#msg").remove()
                 sendData({type: "replay"})
             })
+            break;
+        case "undoRequest":
+            if (data.team !== team) {
+                showMsg("Undo?" + 
+                        "<div id='yes'>YES</div> <div id='no'>NO</div>")
+                $("#yes").click(function() {
+                    $(this).addClass("clicked")
+                    $("#msg").remove()
+                    sendData({type: "undo", answer: "yes"})
+                })
+                $("#no").click(function() {
+                    $(this).addClass("clicked")
+                    $("#msg").remove()
+                    sendData({type: "undo", answer: "no"})
+                })
+            }
+            break;
+        case "undo":
+            $("#msg").remove()
+            if (data.answer === "yes") {
+                $(".last").removeClass('last black white')
+                $("#" + data.last).addClass('last')
+
+                if (data.team === team) {
+                    $("table").removeClass("myTurn")
+                } else {
+                    $("table").addClass("myTurn")
+                }
+            }
             break;
         case "endGame":
             break;
